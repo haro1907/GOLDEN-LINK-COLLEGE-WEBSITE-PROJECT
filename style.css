@@ -106,10 +106,10 @@ h2 {
     text-decoration: underline;
 }
 
-/* Delete button */
-.delete-button {
+/* More specific delete button styling */
+form .delete-button {
     width: 100%;
-    background-color: #e57373; /* Softer red */
+    background-color: #e57373;
     color: white;
     padding: 14px 20px;
     margin: 10px 0;
@@ -121,15 +121,16 @@ h2 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.delete-button:hover {
+form .delete-button:hover {
     background-color: #ef5350;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.delete-button:active {
+form .delete-button:active {
     background-color: #d32f2f;
     box-shadow: none;
 }
+
 
 /* Styling for smaller text messages */
 small {
