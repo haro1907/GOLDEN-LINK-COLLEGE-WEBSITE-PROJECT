@@ -1,30 +1,35 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $lastname = trim($_POST['lastname']);
-    $firstname = trim($_POST['firstname']);
-    $middlename = trim($_POST['middlename']);
-    $dob = trim($_POST['dob']);
-    $contact = trim($_POST['contact']);
-    $email = trim($_POST['email']);
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+// Path to the CSV file
+$csvFile = 'users.csv';
 
-    // Ensure all required fields are filled
-    if (empty($lastname) || empty($firstname) || empty($middlename) || empty($dob) || empty($contact) || empty($email) || empty($username) || empty($password)) {
-        echo "<script>alert('Please fill in all fields.'); window.location.href = 'register.html';</script>";
-        exit();
-    }
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $lastname = $_POST['lastname'];
+    $firstname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
+    $dob = $_POST['dob'];
+    $contact = $_POST['contact'];
 
-    // Prepare the user data string to write to the file
-    $userData = $lastname . ',' . $firstname . ',' . $middlename . ',' . $dob . ',' . $contact . ',' . $email . ',' . $username . ',' . $password . PHP_EOL;
+    // Hash the password for security
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Write the data to the file
-    $file = fopen('users.txt', 'a');
-    fwrite($file, $userData);
+    // Open the CSV file for writing (append mode)
+    $file = fopen($csvFile, 'a');
+
+    // Create a user array (representing a row in the CSV)
+    $userData = [$username, $email, $hashedPassword, $lastname, $firstname, $middlename, $dob, $contact];
+
+    // Write the user data to the CSV file
+    fputcsv($file, $userData);
+
+    // Close the file
     fclose($file);
 
-    // Redirect back to the login page
-    echo "<script>alert('Registration successful! You can now log in.'); window.location.href = 'index.html';</script>";
+    // Redirect back to the login page after registration
+    header("Location: index.html");
     exit();
 }
 ?>

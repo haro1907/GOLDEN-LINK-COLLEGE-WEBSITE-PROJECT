@@ -1,47 +1,49 @@
 <?php
-session_start();
+// Path to the CSV file
+$csvFile = 'users.csv';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get identifier (username or email) and password
-    $identifier = trim($_POST['identifier']); // Username or Email
-    $password = trim($_POST['password']);
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if login and password fields are set
+    if (isset($_POST['login']) && isset($_POST['password'])) {
+        $login = $_POST['login']; // Can be email or username
+        $password = $_POST['password'];
 
-    // Read the users.txt file
-    $users = file('users.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $isAuthenticated = false;
+        // Open the CSV file for reading
+        if (($file = fopen($csvFile, 'r')) !== false) {
+            while (($userData = fgetcsv($file)) !== false) {
+                $storedUsername = $userData[0];
+                $storedEmail = $userData[1];
+                $storedPassword = $userData[2];
 
-    foreach ($users as $user) {
-        $data = explode(',', $user);
+                // Check if the entered login matches either username or email
+                if (($login === $storedUsername || $login === $storedEmail) && password_verify($password, $storedPassword)) {
+                    // Correct login, redirect to profile page
+                    session_start();
+                    $_SESSION['username'] = $storedUsername;
+                    $_SESSION['email'] = $storedEmail;
+                    $_SESSION['lastname'] = $userData[3];
+                    $_SESSION['firstname'] = $userData[4];
+                    $_SESSION['middlename'] = $userData[5];
+                    $_SESSION['dob'] = $userData[6];
+                    $_SESSION['contact'] = $userData[7];
 
-        // Assuming structure: lastname, firstname, middlename, dob, contact, email, username, password
-        $storedEmail = trim($data[5]);
-        $storedUsername = trim($data[6]);
-        $storedPassword = trim($data[7]);
+                    // Redirect to profile page
+                    header("Location: profile.php");
+                    exit();
+                }
+            }
 
-        // Check if identifier matches either email or username
-        if (($identifier === $storedUsername || $identifier === $storedEmail) && $password === $storedPassword) {
-            // Store user data in session for future use
-            $_SESSION['userData'] = [
-                'lastname' => trim($data[0]),
-                'firstname' => trim($data[1]),
-                'middlename' => trim($data[2]),
-                'dob' => trim($data[3]),
-                'contact' => trim($data[4]),
-                'email' => $storedEmail,
-                'username' => $storedUsername,
-            ];
-            $isAuthenticated = true;
-            break;
+            // Close the file after reading
+            fclose($file);
         }
-    }
 
-    // If user is authenticated, redirect to profile page
-    if ($isAuthenticated) {
-        header("Location: profile.php");
-        exit();
+        // If we reach here, login failed
+        echo "Incorrect username or password.";
     } else {
-        echo "<script>alert('Wrong username/email or password. Please try again.'); window.location.href = 'index.html';</script>";
-        exit();
+        echo "Please fill in both the username/email and password.";
     }
+} else {
+    echo "Invalid request method.";
 }
 ?>

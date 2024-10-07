@@ -1,37 +1,37 @@
 <?php
 session_start();
 
-// Check if the form is submitted and user is logged in
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username']) && isset($_SESSION['userData'])) {
-    $username = $_POST['username'];
+// Path to the CSV file
+$csvFile = 'users.csv';
 
-    // Read the users.txt file into an array
-    $users = file('users.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $updatedUsers = [];
+// Open the original CSV file for reading
+if (($file = fopen($csvFile, 'r')) !== false) {
+    // Open a temporary CSV file for writing
+    $tempFile = fopen('temp.csv', 'w');
 
-    // Iterate through users and remove the one matching the current username
-    foreach ($users as $user) {
-        $data = explode(',', $user);
-        $storedUsername = trim($data[6]); // Assuming username is at index 6
+    // Loop through each row in the CSV
+    while (($userData = fgetcsv($file)) !== false) {
+        $storedUsername = $userData[0]; // Username from CSV
 
-        // Only add users who don't match the username
-        if ($storedUsername !== $username) {
-            $updatedUsers[] = $user;
+        // If the username does not match the logged-in user's username, write it to the temp file
+        if ($storedUsername !== $_SESSION['username']) {
+            fputcsv($tempFile, $userData);
         }
     }
 
-    // Write the updated users back to the file
-    file_put_contents('users.txt', implode(PHP_EOL, $updatedUsers) . PHP_EOL);
+    // Close both files
+    fclose($file);
+    fclose($tempFile);
 
-    // Clear the session and log the user out
+    // Replace the original CSV file with the temp file
+    rename('temp.csv', $csvFile);
+
+    // Destroy session and redirect to login page
     session_destroy();
-
-    // Redirect to homepage with a success message
-    echo "<script>alert('Your account has been successfully deleted.'); window.location.href = 'index.html';</script>";
-    exit();
-} else {
-    // If not properly submitted, redirect to homepage
     header("Location: index.html");
     exit();
+} else {
+    // If file couldn't be opened, display error
+    echo "Error: Could not open the file.";
 }
 ?>
