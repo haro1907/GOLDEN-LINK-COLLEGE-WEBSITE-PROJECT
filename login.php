@@ -1,40 +1,47 @@
 <?php
 session_start();
 
-// Define the file to store user data
-$userFile = 'users.txt';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get identifier (username or email) and password
+    $identifier = trim($_POST['identifier']); // Username or Email
+    $password = trim($_POST['password']);
 
-// Retrieve form data
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
+    // Read the users.txt file
+    $users = file('users.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $isAuthenticated = false;
 
-// Check if the file exists and load users
-if (!file_exists($userFile)) {
-    echo "<script>alert('No registered users found.'); window.history.back();</script>";
-    exit();
-}
+    foreach ($users as $user) {
+        $data = explode(',', $user);
 
-// Read the file line by line
-$users = file($userFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        // Assuming structure: lastname, firstname, middlename, dob, contact, email, username, password
+        $storedEmail = trim($data[5]);
+        $storedUsername = trim($data[6]);
+        $storedPassword = trim($data[7]);
 
-// Validate user credentials
-foreach ($users as $user) {
-    list($storedUsername, $storedPasswordHash) = explode(',', $user);
-    
-    // Check if the entered username matches the stored username
-    if ($storedUsername === $username) {
-        // Use password_verify() to compare the entered password with the stored hash
-        if (password_verify($password, $storedPasswordHash)) {
-            $_SESSION['username'] = $username;
-            header("Location: welcome.php");
-            exit();
-        } else {
-            echo "<script>alert('Invalid username or password'); window.history.back();</script>";
-            exit();
+        // Check if identifier matches either email or username
+        if (($identifier === $storedUsername || $identifier === $storedEmail) && $password === $storedPassword) {
+            // Store user data in session for future use
+            $_SESSION['userData'] = [
+                'lastname' => trim($data[0]),
+                'firstname' => trim($data[1]),
+                'middlename' => trim($data[2]),
+                'dob' => trim($data[3]),
+                'contact' => trim($data[4]),
+                'email' => $storedEmail,
+                'username' => $storedUsername,
+            ];
+            $isAuthenticated = true;
+            break;
         }
     }
-}
 
-// If no match is found
-echo "<script>alert('Invalid username or password'); window.history.back();</script>";
+    // If user is authenticated, redirect to profile page
+    if ($isAuthenticated) {
+        header("Location: profile.php");
+        exit();
+    } else {
+        echo "<script>alert('Wrong username/email or password. Please try again.'); window.location.href = 'index.html';</script>";
+        exit();
+    }
+}
 ?>

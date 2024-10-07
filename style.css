@@ -1,86 +1,157 @@
-/* General Styles */
+/* General styling for the body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
     margin: 0;
     padding: 0;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
-.login-container {
-    background-color: white;
-    padding: 40px 30px;
+/* Container styling for forms and profile */
+.container, .profile-container {
+    background-color: #ffffff;
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    text-align: center;
+    max-width: 500px;
+    margin: 20px;
 }
 
-h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Input Styles */
-input[type="text"], input[type="password"] {
-    width: calc(100% - 20px); /* Subtract padding */
-    padding: 10px;
-    margin: 10px 0;
+/* Styling for all inputs and buttons */
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="date"], 
+input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 6px;
     box-sizing: border-box;
+    font-size: 16px;
+    transition: border 0.3s ease;
 }
 
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus, 
+input[type="date"]:focus, 
+input[type="tel"]:focus {
+    border-color: #4CAF50; /* Highlight on focus */
+    outline: none;
+}
+
+/* Submit button styling */
 input[type="submit"] {
+    width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 12px;
+    padding: 14px 20px;
+    margin: 10px 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    width: 100%;
     font-size: 16px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 input[type="submit"]:hover {
     background-color: #45a049;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slight elevation on hover */
 }
 
-/* Error Message */
-.error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    height: 20px; /* Keeps the error space aligned even if there's no error */
+input[type="submit"]:active {
+    background-color: #3e8e41;
+    box-shadow: none;
 }
 
-/* Link to Registration */
-p {
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-p a {
+/* Center and style headings */
+h2 {
+    text-align: center;
     color: #4CAF50;
-    text-decoration: none;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-p a:hover {
+/* Profile container and information display */
+.profile-container p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #555;
+}
+
+.profile-container a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.profile-container a:hover {
     text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Delete button */
+.delete-button {
+    width: 100%;
+    background-color: #e57373; /* Softer red */
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button:hover {
+    background-color: #ef5350;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.delete-button:active {
+    background-color: #d32f2f;
+    box-shadow: none;
+}
+
+/* Styling for smaller text messages */
+small {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+}
+
+/* Responsive design for mobile view */
 @media (max-width: 600px) {
-    .login-container {
-        padding: 30px 20px;
-        width: 90%;
+    .container, .profile-container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input[type="submit"], .delete-button {
+        padding: 12px;
     }
 }

@@ -1,44 +1,30 @@
 <?php
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $lastname = trim($_POST['lastname']);
+    $firstname = trim($_POST['firstname']);
+    $middlename = trim($_POST['middlename']);
+    $dob = trim($_POST['dob']);
+    $contact = trim($_POST['contact']);
+    $email = trim($_POST['email']);
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-// Define the file to store user data
-$userFile = 'users.txt';
-
-// Get form data
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
-
-// Check if the file exists
-if (!file_exists($userFile)) {
-    // Create the file if it doesn't exist
-    file_put_contents($userFile, "");
-}
-
-// Read the contents of the file and store them in an array
-$users = file($userFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-// Check if the username already exists
-foreach ($users as $user) {
-    list($storedUsername, $storedPassword) = explode(',', $user);
-    if ($storedUsername === $username) {
-        echo "<script>alert('Username already exists. Please choose another.'); window.history.back();</script>";
+    // Ensure all required fields are filled
+    if (empty($lastname) || empty($firstname) || empty($middlename) || empty($dob) || empty($contact) || empty($email) || empty($username) || empty($password)) {
+        echo "<script>alert('Please fill in all fields.'); window.location.href = 'register.html';</script>";
         exit();
     }
-}
 
-// Save new user data (hash the password for security)
-$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-$newUser = $username . "," . $hashedPassword . "\n"; // Prepare the new line
+    // Prepare the user data string to write to the file
+    $userData = $lastname . ',' . $firstname . ',' . $middlename . ',' . $dob . ',' . $contact . ',' . $email . ',' . $username . ',' . $password . PHP_EOL;
 
-// Append the new user data to the file and check for errors
-if (file_put_contents($userFile, $newUser, FILE_APPEND) === false) {
-    echo "<script>alert('Error: Unable to write to file.'); window.history.back();</script>";
-} else {
-    echo "<script>
-        alert('Registration successful! You will be redirected to the login page.');
-        window.location.href = 'index.html';
-    </script>";
+    // Write the data to the file
+    $file = fopen('users.txt', 'a');
+    fwrite($file, $userData);
+    fclose($file);
+
+    // Redirect back to the login page
+    echo "<script>alert('Registration successful! You can now log in.'); window.location.href = 'index.html';</script>";
+    exit();
 }
 ?>
