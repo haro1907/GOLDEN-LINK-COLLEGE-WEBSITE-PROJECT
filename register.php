@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $middlename = $_POST['middlename'];
     $dob = $_POST['dob'];
     $contact = $_POST['contact'];
+    $role = $_POST['role'];  // Get the role
 
     // Hash the password for security
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file = fopen($csvFile, 'a');
 
     // Create a user array (representing a row in the CSV)
-    $userData = [$username, $email, $hashedPassword, $lastname, $firstname, $middlename, $dob, $contact];
+    $userData = [$username, $email, $hashedPassword, $lastname, $firstname, $middlename, $dob, $contact, $role];
 
     // Write the user data to the CSV file
     fputcsv($file, $userData);
