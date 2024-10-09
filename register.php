@@ -17,20 +17,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash the password for security
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Open the CSV file for writing (append mode)
-    $file = fopen($csvFile, 'a');
+    // Check if the CSV file is writable
+    if (is_writable($csvFile)) {
+        // Open the CSV file for writing (append mode)
+        $file = fopen($csvFile, 'a');
 
-    // Create a user array (representing a row in the CSV)
-    $userData = [$username, $email, $hashedPassword, $lastname, $firstname, $middlename, $dob, $contact, $role];
+        // Create a user array (representing a row in the CSV)
+        $userData = [$username, $email, $hashedPassword, $lastname, $firstname, $middlename, $dob, $contact, $role];
 
-    // Write the user data to the CSV file
-    fputcsv($file, $userData);
+        // Write the user data to the CSV file
+        fputcsv($file, $userData);
 
-    // Close the file
-    fclose($file);
+        // Close the file
+        fclose($file);
 
-    // Redirect back to the login page after registration
-    header("Location: index.html");
-    exit();
+        // Redirect back to the login page after registration
+        header("Location: index.html");
+        exit();
+    } else {
+        echo "Unable to write to the file. Please check file permissions.";
+    }
 }
 ?>
