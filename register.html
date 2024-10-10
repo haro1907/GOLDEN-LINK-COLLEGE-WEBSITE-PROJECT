@@ -9,50 +9,90 @@
 <body>
     <div class="container">
         <div class="login-box">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <h2>Register</h2>
             <form action="register.php" method="POST">
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" required>
-                </div>
+                <!-- Last Name -->
                 <div class="input-group">
                     <label for="lastname">Last Name</label>
                     <input type="text" name="lastname" required>
                 </div>
+                
+                <!-- First Name -->
                 <div class="input-group">
                     <label for="firstname">First Name</label>
                     <input type="text" name="firstname" required>
                 </div>
+                
+                <!-- Middle Name -->
                 <div class="input-group">
                     <label for="middlename">Middle Name</label>
                     <input type="text" name="middlename">
                 </div>
+                
+                <!-- Date of Birth -->
                 <div class="input-group">
                     <label for="dob">Date of Birth</label>
                     <input type="date" name="dob" required>
                 </div>
+                
+                <!-- Username -->
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                
+                <!-- Contact Number -->
                 <div class="input-group">
                     <label for="contact">Contact Number</label>
-                    <input type="tel" name="contact" pattern="[0-9]{11}" required>
+                    <input type="tel" name="contact" pattern="[0-9]{11}" placeholder="e.g., 09123456789" required>
                 </div>
+                
+                <!-- Email -->
                 <div class="input-group">
-                    <label for="role">Select Role</label>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                
+                <!-- Password -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                
+                <!-- Confirm Password -->
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" required>
+                </div>
+
+                <!-- Role -->
+                <div class="input-group">
+                    <label for="role">Role</label>
                     <select name="role" required>
                         <option value="admin">Admin</option>
                         <option value="student">Student</option>
                         <option value="guest">Guest</option>
                     </select>
                 </div>
+                
+                <!-- Submit Button -->
                 <input type="submit" value="Register">
             </form>
+
+            <!-- Link to Login -->
             <div class="register-link">
                 <p>Already have an account? <a href="index.html">Log in here</a>.</p>
             </div>

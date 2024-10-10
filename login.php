@@ -21,12 +21,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $userData[0];
                     $email = $userData[1];
                     $hashedPassword = $userData[2];
+                    $lastname = $userData[3];
+                    $firstname = $userData[4];
+                    $middlename = $userData[5];
+                    $dob = $userData[6];
+                    $contact = $userData[7];
                     $role = $userData[8]; // Role is stored in index 8
 
                     // Check if the username or email matches
                     if (($usernameOrEmail == $username || $usernameOrEmail == $email) && password_verify($password, $hashedPassword)) {
                         // Store user data in the session
                         $_SESSION['username'] = $username;
+                        $_SESSION['firstname'] = $firstname;
+                        $_SESSION['lastname'] = $lastname;
+                        $_SESSION['middlename'] = $middlename;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['dob'] = $dob;
+                        $_SESSION['contact'] = $contact;
                         $_SESSION['role'] = $role;
 
                         // Redirect based on user role

@@ -10,24 +10,25 @@ body {
     height: 100vh;
 }
 
-/* Container for the forms (login, register, profile, etc.) */
+/* Container for the forms (login, register, dashboards, etc.) */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100%; /* Make the container take full width */
+    padding: 40px; /* Increased padding for better spacing */
 }
 
 /* Box for the login, register, and profile sections */
 .login-box, .profile-container {
     background-color: #fffbea; /* Soft yellow background for the box */
-    padding: 40px;
+    padding: 40px; /* Padding for content inside the box */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    width: 100%;
-    max-width: 400px;
+    width: 100%; /* Make the box take full width */
+    max-width: 500px; /* Reduced max-width for better fit */
     text-align: center;
-    margin: 20px;
+    margin: 20px; /* Margin for spacing */
 }
 
 /* Headings */
