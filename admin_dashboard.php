@@ -4,6 +4,7 @@ if ($_SESSION['role'] != 'admin') {
     header("Location: index.html");
     exit();
 }
+//I am Alex fuckn Blaza
 //HELLOOOOOOO IAM JM
 // Calculate user's age from date of birth
 $dob = new DateTime($_SESSION['dob']);
