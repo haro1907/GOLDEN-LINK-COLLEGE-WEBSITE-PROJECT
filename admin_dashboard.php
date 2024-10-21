@@ -4,13 +4,13 @@ if ($_SESSION['role'] != 'admin') {
     header("Location: index.html");
     exit();
 }
-
+//HELLOOOOOOO IAM JM
 // Calculate user's age from date of birth
 $dob = new DateTime($_SESSION['dob']);
 $today = new DateTime();
 $age = $today->diff($dob)->y;
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
     <title>Admin Dashboard</title>
