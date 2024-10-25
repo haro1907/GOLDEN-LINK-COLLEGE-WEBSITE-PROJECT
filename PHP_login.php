@@ -2,7 +2,7 @@
 session_start();
 
 // Path to the CSV file
-$csvFile = 'users.csv';
+$csvFile = 'ACC_glc_users.csv';
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -44,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Redirect based on user role
                         if ($role == 'admin') {
-                            header("Location: glc_dashADMIN.html");
+                            header("Location: HTML_glc_dashADMIN.html");
                         } elseif ($role == 'student') {
-                            header("Location: glc_dashSTUDENT.html");
+                            header("Location: HTML_glc_dashSTUDENT.html");
                         }
                         $loginSuccess = true;
                         exit();

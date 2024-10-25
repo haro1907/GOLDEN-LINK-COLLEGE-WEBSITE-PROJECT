@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header("Location: glc_home.html");
+header("Location: HTML_glc_home.html");
 exit();
 ?>

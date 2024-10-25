@@ -2,7 +2,7 @@
 session_start();
 
 // Path to the CSV file
-$csvFile = 'users.csv';
+$csvFile = 'ACC_glc_users.csv';
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fclose($file);
 
         // Redirect to login page after successful registration
-        header("Location: glc_login.html");
+        header("Location: HTML_glc_login.html");
         exit();
     } else {
         echo "Unable to write to the file. Please check file permissions.";
