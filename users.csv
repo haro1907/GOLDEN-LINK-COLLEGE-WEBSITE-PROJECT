@@ -1,4 +1,3 @@
-id,Username,Email,Password,"Last Name","First Name","Middle Name","Date of Birth",Contact,Role
-22020050,Haro,harold.brocoy@goldenlink.ph,$2y$10$h0pUNX82bYEeo.abDhAFxOFfQY.Xguy4xAnUoO9eSWSp7w3RnZel2,Brocoy,Harold,Boquila,2004-07-19,09266775415,student
-22020004,Ely,elenor.escalante@goldenlink.ph,$2y$10$GL7f/egQAR3Ka7QnOCz5Ye.NWc3u08lBJLsYzNmZ7Bu7VRkyOXi..,Escalante,Elenor,Bistudio,2003-10-07,09079853472,student
-111111111,JD,johnderson.herbolario@goldenlink.ph,$2y$10$bhfWQ8G0wVOrmNGwpg/uEeyduNKWtQe5nS3qR4VCrTtQMZDB0rNnW,Herbolario,"John Derson",Idontknow,1999-01-01,09123456789,admin
+"ID Number",Username,Email,Password,"Last Name","First Name","Middle Name","Date of Birth",Contact,Role
+22020050,Haro,harold.brocoy@goldenlink.ph,$2y$10$DoZnKySxY.aLQ/8oNqK6beScCS.abxh7eS9ZY5w2x2OVg5gOfKNPG,Brocoy,Harold,Boquila,2004-07-19,09266775415,admin
+22020004,Ely,elenor.escalante@goldenlink.ph,$2y$10$lShjAzIxwrRIu5Yj.fScLe0Lbcs1TehOTvwrqwsclNRtHBfnw/W.6,Escalante,Elenor,Bistudio,2003-10-07,09079853472,student

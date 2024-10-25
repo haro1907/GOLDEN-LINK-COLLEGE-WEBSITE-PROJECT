@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
         // Add headers if creating the file
-        fputcsv($file, ['id', 'Username', 'Email', 'Password', 'Last Name', 'First Name', 'Middle Name', 'Date of Birth', 'Contact', 'Role']);
+        fputcsv($file, ['ID Number', 'Username', 'Email', 'Password', 'Last Name', 'First Name', 'Middle Name', 'Date of Birth', 'Contact', 'Role']);
         fclose($file);
     }
 
