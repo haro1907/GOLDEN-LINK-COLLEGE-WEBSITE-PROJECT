@@ -6,6 +6,8 @@
 
 body {
     background-image:url('https://raw.githubusercontent.com/SaladGrens/GLCWebsite/refs/heads/main/resources/glcimage.jpg'); /* Replace with your image file */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover; /* Makes sure the image covers the whole area */
     background-position: center;
     height: 100vh;
