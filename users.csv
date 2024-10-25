@@ -1,8 +1,4 @@
-Username,Email,Password,"Last Name","First Name","Middle Name","Date of Birth",Contact,Role
-Haro,harold.brocoy@goldenlink.ph,$2y$10$9u3U9nrTvhvqwRx6XcJZzegI.VtWGO19U7o2egftzD3SPfBSSMAzK,Brocoy,Harold,Boquila,2004-07-19,09266775415,student
-Mona,monaliza.brocoy@yahoo.com,$2y$10$11x1xY5PO/rbDGCR7.vcaOtgEbxxhSBp5/Zxr8vFMEsbc8RVwGWfW,Brocoy,Monaliza,Wenceslao,1977-03-14,09277608569,guest
-Ely,elenor.escalante@goldenlink.ph,$2y$10$dzrkSWxgpIxvmo5vmcc1furlTJ3ztiH4umEcPBF1kboWBNedVqXk6,Escalante,Elenor,Bistudio,2003-10-07,09079853472,student
-JD,johnderson.herbolario@goldenlink.ph,$2y$10$vuddac8X/BlgdQ36ZnQdauq5XdhLa2uMMwCC.C5J3vKPbsawqKRJO,Herb,JD,NA,1999-01-01,09266775415,admin
-mabait,jp@email.com,$2y$10$ahpAuppG2O6HN22rZsgSg.0a6UGoRe.REMfRzxWKZ9hk9pWibErSu,Bajao,"John Pogi",Dizon,2002-08-08,09266775415,admin
-Bea,bea@goldenlink.ph,$2y$10$Dg30RSjrmzTu30fKPvpVKu.GKBsglTJtY6yHWeqJakMWBfHo4wGQq,Laurio,Beanna,Sulit,2001-01-01,09266775415,student
-Alex,alexandrei.blaza@goldenlink.ph,$2y$10$LBLWbJqu.uhWscFwgZTqNeRcebuDGnRUjPkDeu8X9wCjE7gCm/WDC,Blaza,Alex,Rivera,2000-01-01,09266775415,admin
+id,Username,Email,Password,"Last Name","First Name","Middle Name","Date of Birth",Contact,Role
+22020050,Haro,harold.brocoy@goldenlink.ph,$2y$10$h0pUNX82bYEeo.abDhAFxOFfQY.Xguy4xAnUoO9eSWSp7w3RnZel2,Brocoy,Harold,Boquila,2004-07-19,09266775415,student
+22020004,Ely,elenor.escalante@goldenlink.ph,$2y$10$GL7f/egQAR3Ka7QnOCz5Ye.NWc3u08lBJLsYzNmZ7Bu7VRkyOXi..,Escalante,Elenor,Bistudio,2003-10-07,09079853472,student
+111111111,JD,johnderson.herbolario@goldenlink.ph,$2y$10$bhfWQ8G0wVOrmNGwpg/uEeyduNKWtQe5nS3qR4VCrTtQMZDB0rNnW,Herbolario,"John Derson",Idontknow,1999-01-01,09123456789,admin

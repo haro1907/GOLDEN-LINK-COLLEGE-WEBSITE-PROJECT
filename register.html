@@ -24,6 +24,12 @@
             <br>
             <h2>Register</h2>
             <form action="register.php" method="POST">
+
+                <!-- Contact Number -->
+                <div class="input-group">
+                    <label for="id">Identification Number</label>
+                    <input type="tel" name="id" pattern="[0-9]{8, 9}" placeholder="e.g., 22020050" required>
+                </div>
                 <!-- Last Name -->
                 <div class="input-group">
                     <label for="lastname">Last Name</label>
@@ -84,7 +90,6 @@
                     <select name="role" required>
                         <option value="admin">Admin</option>
                         <option value="student">Student</option>
-                        <option value="guest">Guest</option>
                     </select>
                 </div>
                 
@@ -94,7 +99,7 @@
 
             <!-- Link to Login -->
             <div class="register-link">
-                <p>Already have an account? <a href="index.html">Log in here</a>.</p>
+                <p>Already have an account? <a href="login.html">Log in here</a>.</p>
             </div>
         </div>
     </div>

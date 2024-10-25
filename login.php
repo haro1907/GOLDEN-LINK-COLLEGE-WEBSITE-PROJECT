@@ -18,19 +18,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (($file = fopen($csvFile, 'r')) !== FALSE) {
                 $loginSuccess = false;
                 while (($userData = fgetcsv($file)) !== FALSE) {
-                    $username = $userData[0];
-                    $email = $userData[1];
-                    $hashedPassword = $userData[2];
-                    $lastname = $userData[3];
-                    $firstname = $userData[4];
-                    $middlename = $userData[5];
-                    $dob = $userData[6];
-                    $contact = $userData[7];
-                    $role = $userData[8]; // Role is stored in index 8
+                    $id = $userData[0];
+                    $username = $userData[1];
+                    $email = $userData[2];
+                    $hashedPassword = $userData[3];
+                    $lastname = $userData[4];
+                    $firstname = $userData[5];
+                    $middlename = $userData[6];
+                    $dob = $userData[7];
+                    $contact = $userData[8];
+                    $role = $userData[9];
 
                     // Check if the username or email matches
                     if (($usernameOrEmail == $username || $usernameOrEmail == $email) && password_verify($password, $hashedPassword)) {
                         // Store user data in the session
+                        $_SESSION['id'] = $id;
                         $_SESSION['username'] = $username;
                         $_SESSION['firstname'] = $firstname;
                         $_SESSION['lastname'] = $lastname;
@@ -45,8 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("Location: glc_aboutADMIN.html");
                         } elseif ($role == 'student') {
                             header("Location: glc_aboutSTUDENT.html");
-                        } elseif ($role == 'guest') {
-                            header("Location: guest_dashboard.php");
                         }
                         $loginSuccess = true;
                         exit();

@@ -7,6 +7,7 @@ $csvFile = 'users.csv';
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capture all form fields
+    $id = $_POST['id'];
     $lastname = $_POST['lastname'];
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Validate that all required fields are filled
-    if (empty($lastname) || empty($firstname) || empty($dob) || empty($username) || empty($contact) || empty($email) || empty($password) || empty($role)) {
+    if (empty($id) || empty($lastname) || empty($firstname) || empty($dob) || empty($username) || empty($contact) || empty($email) || empty($password) || empty($role)) {
         echo "All fields are required.";
         exit();
     }
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
         // Add headers if creating the file
-        fputcsv($file, ['Username', 'Email', 'Password', 'Last Name', 'First Name', 'Middle Name', 'Date of Birth', 'Contact', 'Role']);
+        fputcsv($file, ['id', 'Username', 'Email', 'Password', 'Last Name', 'First Name', 'Middle Name', 'Date of Birth', 'Contact', 'Role']);
         fclose($file);
     }
 
@@ -52,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Store the user data
         $userData = [
+            $id,
             $username,
             $email,
             $hashedPassword,
@@ -70,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fclose($file);
 
         // Redirect to login page after successful registration
-        header("Location: index.html");
+        header("Location: login.html");
         exit();
     } else {
         echo "Unable to write to the file. Please check file permissions.";

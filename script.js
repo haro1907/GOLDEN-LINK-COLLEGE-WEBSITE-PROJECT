@@ -41,4 +41,3 @@ function validateRegistration() {
 
     return true;
 }
-//SAMPLE CHANGE

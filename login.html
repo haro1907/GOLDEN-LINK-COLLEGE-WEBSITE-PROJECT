@@ -20,11 +20,23 @@
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     <input type="checkbox" id="show-password" onclick="togglePassword()"> Show Password
                 </div>
+                <!-- Role -->
+                <div class="input-group">
+                    <label for="role">Role</label>
+                    <select name="role" required>
+                        <option value="admin">Admin</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                
                 <div class="input-group">
                     <input type="submit" value="Login" class="btn">
                 </div>
                 <div class="register-link">
                     <p>Don't have an account? <a href="register.html">Register here</a></p>
+                </div>
+                <div class="backhome-link">
+                    <p>Stay as a guest? <a href="glc_home.html">Click here</a></p>
                 </div>
             </form>
         </div>

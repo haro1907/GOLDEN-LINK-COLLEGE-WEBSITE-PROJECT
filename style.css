@@ -1,7 +1,15 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f9ff; /* Light blue background for the whole page */
+    
+    background-image:url('glcimage.jpg'); /* Replace with your image file */ /*https://raw.githubusercontent.com/SaladGrens/GLCWebsite/refs/heads/main/resources/glcimage.jpg*/
+    background-size: cover; /* Makes sure the image covers the whole area */
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    /*justify-content: flex-start;*/
+
     margin: 0;
     padding: 0;
     display: flex;
@@ -127,8 +135,8 @@ form .delete-button:hover {
     background-color: #ff1a1a; /* Darker red on hover */
 }
 
-/* Logout Button */
-.logout-button {
+/* back Button */
+.back-button {
     background-color: #007BFF; /* Soft blue for the logout button */
     color: white;
     padding: 10px 20px;
@@ -140,7 +148,7 @@ form .delete-button:hover {
     transition: background-color 0.3s ease-in-out;
 }
 
-.logout-button:hover {
+.back-button:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
 
@@ -159,6 +167,23 @@ form .delete-button:hover {
 }
 
 .register-link a:hover {
+    text-decoration: underline;
+}
+
+.backhome-link {
+    margin-top: 15px;
+}
+
+.backhome-link p {
+    font-size: 14px;
+    color: #555555;
+}
+
+.backhome-link a {
+    color: #004085; /* Soft blue for register link */
+}
+
+.backhome-link a:hover {
     text-decoration: underline;
 }
 
