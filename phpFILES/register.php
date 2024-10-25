@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fclose($file);
 
         // Redirect to login page after successful registration
-        header("Location: login.html");
+        header("Location: glc_login.html");
         exit();
     } else {
         echo "Unable to write to the file. Please check file permissions.";

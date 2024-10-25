@@ -28,7 +28,7 @@ if (($file = fopen($csvFile, 'r')) !== false) {
 
     // Destroy session and redirect to login page
     session_destroy();
-    header("Location: login.html");
+    header("Location: glc_login.html");
     exit();
 } else {
     // If file couldn't be opened, display error

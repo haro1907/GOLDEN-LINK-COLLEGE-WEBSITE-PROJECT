@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['role'] != 'admin') {
-    header("Location: login.html");
+    header("Location: glc_login.html");
     exit();
 }
 //HELLOOOOOOO IAM JM
@@ -14,7 +14,7 @@ $age = $today->diff($dob)->y;
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="glc_login.css">
 </head>
 <body>
     <div class="container">
@@ -30,7 +30,7 @@ $age = $today->diff($dob)->y;
             <p><strong>Date of Birth:</strong> <?php echo $_SESSION['dob']; ?></p>
             <p><strong>Age:</strong> <?php echo $age; ?></p>
             <p><strong>Contact Number:</strong> <?php echo $_SESSION['contact']; ?></p>
-            <a href="glc_aboutADMIN.html" class="back-button">Back</a>
+            <a href="glc_dashADMIN.html" class="back-button">Back</a>
 
             <!-- Delete Account Option -->
             <form action="delete.php" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">

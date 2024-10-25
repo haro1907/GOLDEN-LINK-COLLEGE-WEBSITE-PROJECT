@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['role'] != 'student') {
-    header("Location: login.html");
+    header("Location: glc_login.html");
     exit();
 }
 
@@ -14,7 +14,7 @@ $age = $today->diff($dob)->y;
 <html>
 <head>
     <title>Student Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="glc_login.css">
 </head>
 <body>
     <div class="container">
@@ -30,7 +30,7 @@ $age = $today->diff($dob)->y;
             <p><strong>Date of Birth:</strong> <?php echo $_SESSION['dob']; ?></p>
             <p><strong>Age:</strong> <?php echo $age; ?></p>
             <p><strong>Contact Number:</strong> <?php echo $_SESSION['contact']; ?></p>
-            <a href="glc_aboutSTUDENT.html" class="back-button">Back</a>
+            <a href="glc_dashSTUDENT.html" class="back-button">Back</a>
 
             <!-- Delete Account Option -->
             <form action="delete.php" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">

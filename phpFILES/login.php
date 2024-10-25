@@ -44,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Redirect based on user role
                         if ($role == 'admin') {
-                            header("Location: glc_aboutADMIN.html");
+                            header("Location: glc_dashADMIN.html");
                         } elseif ($role == 'student') {
-                            header("Location: glc_aboutSTUDENT.html");
+                            header("Location: glc_dashSTUDENT.html");
                         }
                         $loginSuccess = true;
                         exit();
