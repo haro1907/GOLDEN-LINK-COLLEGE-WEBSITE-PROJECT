@@ -7,7 +7,7 @@ $csvFile = 'ACC_glc_users.csv';
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['username_or_email']) || empty($_POST['password'])) {
-        echo "Please fill in all required fields.";
+        echo "<script>alert('Please fill in all required fields.'); window.history.back();</script>";
     } else {
         $usernameOrEmail = filter_var($_POST['username_or_email'], FILTER_SANITIZE_STRING);
         $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
@@ -55,13 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 fclose($file);
                 
                 if (!$loginSuccess) {
-                    echo "Incorrect username or password.";
+                    echo "<script>
+                        if (confirm('Incorrect username or password. Click OK to try again.')) {
+                            window.history.back();
+                        }
+                    </script>";
                 }
             } else {
-                echo "Error reading the user data file.";
+                echo "<script>alert('Error reading the user data file.'); window.history.back();</script>";
             }
         } else {
-            echo "User data file is not accessible.";
+            echo "<script>alert('User data file is not accessible.'); window.history.back();</script>";
         }
     }
 }
