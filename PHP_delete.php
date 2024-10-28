@@ -11,10 +11,10 @@ if (($file = fopen($csvFile, 'r')) !== false) {
 
     // Loop through each row in the CSV
     while (($userData = fgetcsv($file)) !== false) {
-        $storedUsername = $userData[0]; // Username from CSV
+        $storedid = $userData[0]; // Username from CSV
 
         // If the username does not match the logged-in user's username, write it to the temp file
-        if ($storedUsername !== $_SESSION['username']) {
+        if ($storedid !== $_SESSION['id']) {
             fputcsv($tempFile, $userData);
         }
     }

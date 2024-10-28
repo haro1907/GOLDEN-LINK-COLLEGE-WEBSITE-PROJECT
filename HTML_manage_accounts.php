@@ -21,7 +21,7 @@ if (($handle = fopen("ACC_glc_users.csv", "r")) !== FALSE) {
 <html>
 <head>
     <title>Manage Accounts</title>
-    <link rel="stylesheet" href="CSS_glc_login.css">
+    <link rel="stylesheet" href="style_MANAGE_acc.css">
 </head>
 <body>
     <div class="container">
