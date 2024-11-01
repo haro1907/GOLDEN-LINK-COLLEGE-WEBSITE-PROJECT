@@ -19,11 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = $_POST['confirm_password'];
     $role = $_POST['role']; // Capturing the role
     
+    //Check Password Strength
+    if (strlen($password) < 6 || 
+        !preg_match("/[A-Z]/", $password) || 
+        !preg_match("/[a-z]/", $password) || 
+        !preg_match("/[0-9]/", $password) || 
+        !preg_match("/[!@#$%^&*_]/", $password)) {
+        echo "Password is not strong enough!";
+        echo "Must contain at least 6 characters with: ";
+        echo "Uppercase, Lowercase, Number, & !@#$%^&*_";
+    } else {
+        echo "Password is strong!";
+    }
+
     // Check if passwords match
     if ($password !== $confirm_password) {
         echo "Passwords do not match. Please re-enter the password.";
         exit();
     }
+
+    
     
     // Hash the password for security
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -80,3 +95,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
