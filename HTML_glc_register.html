@@ -78,13 +78,14 @@
                 <!-- Password -->
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" required>
+                    <input type="password" id = "password" name="password" required>
+                    <span id="passwordStrength"></span>
                 </div>
                 
                 <!-- Confirm Password -->
                 <div class="input-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="password" name="confirm_password" required>
+                    <input type="password" id = "confirm_password" name="confirm_password" required>
                 </div>
 
                 <!-- Role -->
@@ -99,6 +100,39 @@
                 <!-- Submit Button -->
                 <input type="submit" value="Register">
             </form>
+
+            
+            <!--Password Strength-->
+            <script>
+                const passwordInput = document.getElementById("password");
+                const passwordStrength = document.getElementById("passwordStrength");
+                
+
+                passwordInput.addEventListener("input", function () {
+                  const password = passwordInput.value;
+                  const strength = checkPasswordStrength(password);
+                  passwordStrength.textContent = strength;
+                  passwordStrength.style.color = strength === "Strong" ? "green" : strength === "Medium" ? "orange" : "red";
+                });
+            
+                function checkPasswordStrength(password) {
+                  if (password.length < 8) {
+                    return "Too Short";
+                  }
+                  const hasUpper = /[A-Z]/.test(password);
+                  const hasLower = /[a-z]/.test(password);
+                  const hasNumber = /[0-9]/.test(password);
+                  const hasSpecial = /[!@#$%^&*_]/.test(password);
+            
+                  if (hasUpper && hasLower && hasNumber && hasSpecial) {
+                    return "Strong";
+                  } else if ((hasUpper || hasLower) && hasNumber) {
+                    return "Medium";
+                  } else {
+                    return "Weak";
+                  }
+                }
+              </script>
 
             <!-- Link to Login -->
             <div class="register-link">
