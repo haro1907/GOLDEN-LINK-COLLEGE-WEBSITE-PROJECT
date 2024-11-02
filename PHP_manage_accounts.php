@@ -5,19 +5,25 @@ if ($_SESSION['role'] != 'admin') {
     exit();
 }
 
-// Read users from CSV file
-$users = [];
-if (($handle = fopen("ACC_glc_users.csv", "r")) !== FALSE) {
-    // Get the header row
-    $header = fgetcsv($handle);
-    // Read each row and push to users array
-    while (($data = fgetcsv($handle)) !== FALSE) {
-        $users[] = array_combine($header, $data);
-    }
-    fclose($handle);
+// Database connection details
+$host = 'localhost';
+$db = 'webglc_database';
+$user = 'root'; // Default MySQL username in XAMPP
+$pass = '';     // Default MySQL password (usually empty in XAMPP)
+
+try {
+    // Create a new PDO instance
+    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Fetch all users from the database
+    $stmt = $pdo->query("SELECT id, username, email, firstname, middlename, lastname, dob, contact FROM glc_users");
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Could not connect to the database: " . $e->getMessage());
 }
 ?>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Manage Accounts</title>
@@ -28,46 +34,46 @@ if (($handle = fopen("ACC_glc_users.csv", "r")) !== FALSE) {
         <div class="login-box">
             <a href="HTML_glc_dashADMIN.html" class="back-button">Back</a>
 
-            <!-- Display users from CSV file -->
+            <!-- Display users from MySQL database -->
             <h2>All Users</h2>
-                <table border ="1">
-                    <thead>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Identification Number</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Age</th> <!-- Added Age column -->
+                        <th>Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
                         <tr>
-                            <th>Identification Number</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Middle Name</th>
-                            <th>Last Name</th>
-                            <th>Date of Birth</th>
-                            <th>Age</th> <!-- Added Age column -->
-                            <th>Contact Number</th>
+                            <td><?php echo htmlspecialchars($user['id']); ?></td>
+                            <td><?php echo htmlspecialchars($user['username']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td><?php echo htmlspecialchars($user['firstname']); ?></td>
+                            <td><?php echo htmlspecialchars($user['middlename']); ?></td>
+                            <td><?php echo htmlspecialchars($user['lastname']); ?></td>
+                            <td><?php echo htmlspecialchars($user['dob']); ?></td>
+                            <td>
+                                <?php 
+                                    // Calculate age from the date of birth
+                                    $dob = new DateTime($user['dob']);
+                                    $today = new DateTime();
+                                    $age = $today->diff($dob)->y;
+                                    echo $age; // Display age
+                                ?>
+                            </td>
+                            <td><?php echo htmlspecialchars($user['contact']); ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($users as $user): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($user['ID Number']); ?></td>
-                                <td><?php echo htmlspecialchars($user['Username']); ?></td>
-                                <td><?php echo htmlspecialchars($user['Email']); ?></td>
-                                <td><?php echo htmlspecialchars($user['First Name']); ?></td>
-                                <td><?php echo htmlspecialchars($user['Middle Name']); ?></td>
-                                <td><?php echo htmlspecialchars($user['Last Name']); ?></td>
-                                <td><?php echo htmlspecialchars($user['Date of Birth']); ?></td>
-                                <td>
-                                    <?php 
-                                        // Calculate age from the date of birth
-                                        $dob = new DateTime($user['Date of Birth']);
-                                        $today = new DateTime();
-                                        $age = $today->diff($dob)->y;
-                                        echo $age; // Display age
-                                    ?>
-                                </td>
-                                <td><?php echo htmlspecialchars($user['Contact']); ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>

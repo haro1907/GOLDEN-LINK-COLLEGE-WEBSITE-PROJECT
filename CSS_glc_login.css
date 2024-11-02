@@ -2,7 +2,7 @@
 body {
     font-family: 'Arial', sans-serif;
     
-    background-image:url('https://raw.githubusercontent.com/SaladGrens/GLCWebsite/refs/heads/main/resources/glcimage.jpg'); /* Replace with your image file */ 
+    background-image: url('https://raw.githubusercontent.com/SaladGrens/GLCWebsite/refs/heads/main/resources/glcimage.jpg'); /* Replace with your image file */ 
     background-size: cover; /* Makes sure the image covers the whole area */
     background-position: center;
     background-repeat: no-repeat;
@@ -10,14 +10,8 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
-    /*justify-content: flex-start;*/
-
-    margin: 0;
-    padding: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 /* Container for the forms (login, register, dashboards, etc.) */
@@ -29,8 +23,8 @@ body {
     padding: 40px; /* Increased padding for better spacing */
 }
 
-/* Box for the login, register, and profile sections */
-.login-box, .profile-container {
+/* Box for the login, register, profile, and reset sections */
+.login-box, .profile-container, .reset-box {
     background-color: #fffbea; /* Soft yellow background for the box */
     padding: 40px; /* Padding for content inside the box */
     border-radius: 15px; /* Rounded corners */
@@ -152,6 +146,24 @@ form .delete-button:hover {
 
 .back-button:hover {
     background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* forgot-password link text */
+.forgot-password-link {
+    margin-top: 15px;
+}
+
+.forgot-password-link p {
+    font-size: 14px;
+    color: #555555;
+}
+
+.forgot-password-link a {
+    color: #004085; /* Soft blue for register link */
+}
+
+.forgot-password-link a:hover {
+    text-decoration: underline;
 }
 
 /* Register link text */

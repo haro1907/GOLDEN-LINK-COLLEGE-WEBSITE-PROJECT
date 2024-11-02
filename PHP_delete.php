@@ -1,37 +1,39 @@
 <?php
 session_start();
 
-// Path to the CSV file
-$csvFile = 'ACC_glc_users.csv';
+// Database connection details
+$host = 'localhost';
+$db = 'webglc_database';
+$user = 'root'; // Default MySQL username in XAMPP
+$pass = '';     // Default MySQL password (usually empty in XAMPP)
 
-// Open the original CSV file for reading
-if (($file = fopen($csvFile, 'r')) !== false) {
-    // Open a temporary CSV file for writing
-    $tempFile = fopen('temp.csv', 'w');
+try {
+    // Create a new PDO instance
+    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Could not connect to the database: " . $e->getMessage());
+}
 
-    // Loop through each row in the CSV
-    while (($userData = fgetcsv($file)) !== false) {
-        $storedid = $userData[0]; // Username from CSV
+// Check if user is logged in
+if (isset($_SESSION['id'])) {
+    // Get the logged-in user's ID
+    $userId = $_SESSION['id'];
 
-        // If the username does not match the logged-in user's username, write it to the temp file
-        if ($storedid !== $_SESSION['id']) {
-            fputcsv($tempFile, $userData);
-        }
+    // Prepare the SQL statement to delete the user
+    $sql = "DELETE FROM glc_users WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+
+    // Execute the query
+    if ($stmt->execute([':id' => $userId])) {
+        // Destroy the session and redirect to login page
+        session_destroy();
+        header("Location: HTML_glc_login.html");
+        exit();
+    } else {
+        echo "Error: Could not delete the user.";
     }
-
-    // Close both files
-    fclose($file);
-    fclose($tempFile);
-
-    // Replace the original CSV file with the temp file
-    rename('temp.csv', $csvFile);
-
-    // Destroy session and redirect to login page
-    session_destroy();
-    header("Location: HTML_glc_login.html");
-    exit();
 } else {
-    // If file couldn't be opened, display error
-    echo "Error: Could not open the file.";
+    echo "Error: User not logged in.";
 }
 ?>
